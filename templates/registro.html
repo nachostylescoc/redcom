@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - RedCom</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style,css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>RedCom</h1>
+        <p>Comparte apuntes, tareas, dudas y ejercicios</p>
+    </header>
+
+    <main>
+        <div class="form-box">
+            <h2>Crear cuenta</h2>
+
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+
+            <form method="POST">
+                <label>Nombre</label>
+                <input type="text" name="nombre" required>
+
+                <label>Email</label>
+                <input type="email" name="email" required>
+
+                <label>Contraseña</label>
+                <input type="password" name="password" required>
+
+                <button type="submit">Registrarse</button>
+            </form>
+
+            <p class="form-link">¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir RedCom</title>
+    <link rel="sylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div>
+                <h1>RedCom</h1>
+                <p>Comparte apuntes, tareas, dudas y ejercicios</p>
+            </div>
+            <nav>
+                {% if session['usuario_nombre'] %}
+                    <span class="nav-usuario">Hola, {{ session['usuario_nombre'] }}</span>
+                    <a href="/logout" class="btn-nav">Cerrar sesión</a>
+                {% else %}
+                    <a href="/login" class="btn-nav">Iniciar sesión</a>
+                    <a href="/registro" class="btn-nav btn-rojo">Registrarse</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-box" style="max-width: 560px;">
+            <h2>Subir contenido</h2>
+
+            <form method="POST" enctype="multipart/form-data">
+                <label>Titulo</label>
+                <input type="text" name="titulo" required>
+
+                <label>Tipo</label>
+                <select name="tipo">
+                    <option value="apunte">Apunte</option>
+                    <option value="tarea">Tarea</option>
+                    <option value="duda">Duda</option>
+                    <option value="ejercicio">Ejercicio</option>
+                </select>
+
+                <label>Materia</label>
+                <input type="text" name="materia" required>
+
+                <label>Descripción</label>
+                <textarea name="descripcion" rows="4" required></textarea>
+
+                <label>Archivo (opcional)</label>
+                <input type="file" name="archivo">
+
+                <button type="submit">Publicar</button>
+            </form>
+        </div>
+    </main>
+
+</body>
+</html>

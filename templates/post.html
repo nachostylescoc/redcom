@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.titulo }} - RedCom</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div>
+                <h1>RedCom</h1>
+                <p>Comparte apuntes, tareas, dudas y ejercicios</p>
+            </div>
+            <nav>
+                {% if session['usuario_nombre'] %}
+                    <span class="nav-usuario">Hola, {{ session['usuario_nombre'] }}</span>
+                    <a href="/subir" class="btn-nav btn-rojo">Subir</a>
+                    <a href="/logout" class="btn-nav">Cerrar sesión</a>
+                {% else %}
+                    <a href="/login" class="btn-nav">Iniciar sesión</a>
+                    <a href="/registro" class="btn-nav btn-rojo">Registrarse</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <a href="/" class="btn-volver">Volver</a>
+
+        <div class="post-detalle">
+            <div class="post-tipo tipo-{{ post.tipo }}">{{ post.tipo }}</div>
+            <h2 class="post-detalle-titulo">{{ post.titulo }}</h2>
+            <div class="post-detalle-meta">
+                <span>{{ post.autor }}</span>
+                <span>{{ post.materia }}</span>
+                <span>{{ post.fecha }}</span>
+            </div>
+
+            <div class="post-detalle-desc">{{ post.descripcion }}</div>
+
+            {% if post.archivo %}
+                <a href="/static/uploads/{{ post.archivo }}" class="btn-archivo" target="_blank">
+                        {{ post.archivo }}
+                </a>
+            {% endif %}
+        </div>
+
+        <div class="comentarios-box">
+            <h3>Comentarios ({{ comentarios|length }})</h3>
+
+            {% if comentarios %}
+                {% for c in comentarios %}
+                    <div class="comentario">
+                        <div class="comentario-header">
+                            <span class="comentario-autor">{{ c.autor }}</span>
+                            <span class="comentario-fecha">{{ c.fecha }}</span>
+                        </div>
+                        <div class="comentario-texto">{{ c.contenido }}</div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p style="color: #aaa;font-size: 14px;">No hay comentarios aún</p>
+            {% endif %}
+
+            <form method="POST" style="margin-top: 24px;">
+                <label style="font-size: 14px;color: #ccc;display: block;margin-bottom: 8px;">Escribe un comentario</label>
+                <textarea name="contenido" rows="3" required
+                    style="width: 100%;padding: 10px;border-radius: 6px;border: 1px solid #444;
+                    background: #1e1e1e;color: #f5f5f5;font-size: 14px;font-family: Arial,sans-serif;
+                    margin-bottom: 10px;"></textarea>
+                <button type="submit" class="btn-comentar">Comentar</button>
+            </form>
+        </div>
+    </main>
+
+</body>
+</html>
