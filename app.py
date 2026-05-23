@@ -15,14 +15,31 @@ crear_tablas()
 @app.route('/')
 def index():
     conn = conectar()
-    lista = conn.execute('''
+
+    tipo = request.args.get('tipo', '')
+    materia = request.args.get('materia', '')
+
+    query = '''
         SELECT posts.*, usuarios.nombre as autor
         FROM posts
         JOIN usuarios ON posts.usuario_id = usuarios.id
-        ORDER BY posts.fecha DESC
-    ''').fetchall()
+        WHERE 1=1
+    '''
+    params = []
+
+    if tipo:
+        query += ' AND posts.tipo = ?'
+        params.append(tipo)
+
+    if materia:
+        query += ' AND posts.materia LIKE ?'
+        params.append(f'%{materia}%')
+
+    query += ' ORDER BY posts.fecha DESC'
+
+    lista = conn.execute(query, params).fetchall()
     conn.close()
-    return render_template('index.html', posts=lista)
+    return render_template('index.html', posts=lista, tipo_activo=tipo, materia_activa=materia)
 
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():

@@ -338,3 +338,45 @@ nav {
 .btn-comentar:hover {
     background-color: #b30000;
 }
+
+.filtros {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.filtros-tipo {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filtros-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    text-decoration: none;
+    border: 1px solid #444;
+    color: #aaa;
+    transition: all 0.2s;
+}
+
+.filtro-btn:hover {
+    border-color: #cc0000;
+    color: #cc0000;
+}
+
+.filtros-btn.activo {
+    background-color: #cc0000;
+    border-color: #cc0000;
+    color: white;
+}
+
+.filtro-buscar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

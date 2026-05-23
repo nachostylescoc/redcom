@@ -28,6 +28,29 @@
     </header>
 
     <main>
+        <div class="filtros">
+            <div class="filtros-tipo">
+                <a href="/" class="filtro-btn {% if not tipo_activo %}activo{% endif %}">Todo</a>
+                <a href="/?tipo=apunte" class="filtro-btn {% if tipo_activo == 'apunte' %}activo{% endif %}">Apuntes</a>
+                <a href="/?tipo=tarea" class="filtro-btn {% if tipo_activo == 'tarea' %}activo{% endif %}">Tareas</a>
+                <a href="/?tipo=duda" class="filtro-btn {% if tipo_activo == 'duda' %}activo{% endif %}">Dudas</a>
+                <a href="/?tipo=ejercicio" class="filtro-btn {% if tipo_activo == 'ejercicio' %}activo{% endif %}">Ejercicios</a>
+            </div>
+
+            <form method="GET" class="filtro-buscar">
+                <input type="text" name="materia" placeholder="Buscar por materia..."
+                    value="{{ materia_activa }}"
+                    style="padding: 7px 12px;border-radius: 6px;border: 1px solid #444;
+                    background: #2d2d2d;color: #f5f5f5;font-size: 13px;">
+                <button type="submit"
+                    style="padding: 7px 14px;background: #cc0000;color: white;border: none;
+                    border-radius: 6px;font-size: 13px;cursor: pointer;">Buscar</button>
+                {% if materia_activa %}
+                    <a href="/" style="font-size: 13px;color: #aaa;text-decoration: none;">Limpiar</a>
+                {% endif %}
+            </form>
+        </div>
+
         <h2 style="margin-bottom: 20px;">Contenido reciente</h2>
 
         {% if posts %}
