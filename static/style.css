@@ -421,3 +421,20 @@ nav {
     color: #cc0000;
     font-weight: 500;
 }
+
+.btn-eliminar {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 16px;
+    background-color: transparent;
+    border: 1px solid #cc0000;
+    border-radius: 6px;
+    color: #cc0000;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.btn-eliminar:hover {
+    background-color: #cc0000;
+    color: white;
+}

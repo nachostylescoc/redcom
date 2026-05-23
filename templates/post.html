@@ -47,6 +47,12 @@
                         {{ post.archivo }}
                 </a>
             {% endif %}
+            {% if session['usuario_id'] == post.usuario_id %}
+                <a href="/eliminar/{{ post.id }}" class="btn-eliminar"
+                    onclick="return confirm('¿Seguro que quieres eliminar este post?')">
+                    Eliminar post
+                </a>
+            {% endif %}
         </div>
 
         <div class="comentarios-box">

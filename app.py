@@ -169,5 +169,24 @@ def perfil(id):
     conn.close()
     return render_template('perfil.html', usuario=usuario, posts=posts)
 
+@app.route('/eliminar/<int:id>')
+def eliminar(id):
+    if 'usuario_id' not in session:
+        return redirect(url_for('login'))
+
+    conn = conectar()
+    post = conn.execute('SELECT * FROM posts WHERE id = ?', (id,)).fetchone()
+
+    if post['usuario_id'] != session['usuario_id']:
+        conn.close()
+        return redirect(url_for('index'))
+
+    conn.execute('DELETE FROM comentarios WHERE post_id = ?', (id,))
+    conn.execute('DELETE FROM posts WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for('index'))
+
 if __name__ =='__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
