@@ -34,7 +34,8 @@
             <div class="post-tipo tipo-{{ post.tipo }}">{{ post.tipo }}</div>
             <h2 class="post-detalle-titulo">{{ post.titulo }}</h2>
             <div class="post-detalle-meta">
-                <span>{{ post.autor }}</span>
+                <span><a href="/perfil/{{ post.usuario_id}}"
+                    style="color: #cc0000;text-decoration: none;">{{ post.autor }}</a></span>
                 <span>{{ post.materia }}</span>
                 <span>{{ post.fecha }}</span>
             </div>

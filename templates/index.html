@@ -61,7 +61,8 @@
                         <div class="post-titulo">{{ post.titulo }}</div>
                         <div class="post-materia">{{ post.materia }}</div>
                         <div class="post-meta">
-                            <span>{{ post.autor }}</span>
+                            <span><a href="/perfil/{{ post.usuario_id }}"
+                                style="color: #cc0000;text-decoration: none;">{{ post.autor }}</a></span>
                             <span>{{ post.fecha }}</span>
                         </div>
                     </a>

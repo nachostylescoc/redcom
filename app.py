@@ -158,5 +158,16 @@ def post(id):
     conn.close()
     return render_template('post.html', post=p, comentarios=comentarios)
 
+@app.route('/perfil/<int:id>')
+def perfil(id):
+    conn = conectar()
+    usuario = conn.execute('SELECT * FROM usuarios WHERE id = ?', (id,)).fetchone()
+    posts = conn.execute('''
+        SELECT * FROM posts WHERE usuario_id = ?
+        ORDER BY fecha DESC
+    ''', (id,)).fetchall()
+    conn.close()
+    return render_template('perfil.html', usuario=usuario, posts=posts)
+
 if __name__ =='__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

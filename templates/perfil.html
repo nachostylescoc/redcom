@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ usuario.nombre }} - RedCom</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div>
+                <h1>RedCom</h1>
+                <p>Comparte apuntes, tareas, dudas y ejercicios</p>
+            </div>
+            <nav>
+                {% if session['usuario_nombre'] %}
+                    <span class="nav-usuario">Hola, {{ session['usuario_nombre'] }}</span>
+                    <a href="/subir" class="btn-nav btn-rojo">Subir</a>
+                    <a href="/logout" class="btn-nav">Cerrar sesión</a>
+                {% else %}
+                    <a href="/login" class="btn-nav">Iniciar sesión</a>
+                    <a href="/registro" class="btn-nav btn-rojo">Registrarse</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <a href="/" class="btn-volver">Volver</a>
+
+        <div class="perfil-box">
+            <div class="perfil-avatar">{{ usuario.nombre[0] }}</div>
+            <div>
+                <h2 class="perfil-nombre">{{ usuario.nombre }}</h2>
+                <p class="perfil-fecha">Miembro desde {{ usuario.fecha_registro }}</p>
+                <p class="perfil-stats">{{ posts|length }} publicaciones</p>
+            </div>
+        </div>
+
+        <h3 style="margin-bottom: 16 px; color: #f5f5f5;">Publicaciones de {{ usuario.nombre }}</h3>
+
+        {% if posts %}
+            <div class="posts-grid">
+                {% for post in posts %}
+                    <a href="/post/{{ post.id }}" class="post-card">
+                        <div class="post-tipo tipo-{{ post.tipo }}">{{ post.tipo }}</div>
+                        <div class="post-titulo">{{ post.titulo }}</div>
+                        <div class="post-materia">{{ post.materia }}</div>
+                        <div class="post-meta">
+                            <span>{{ post.materia }}</span>
+                            <span>{{ post.fecha }}</span>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p style="color: #aaa;">Este usuario no ha publicado nada aún.</p>
+        {% endif %}
+    </main>
+
+</body>
+</html>

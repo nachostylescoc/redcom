@@ -380,3 +380,44 @@ nav {
     align-items: center;
     gap: 8px;
 }
+
+.perfil-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: #2d2d2d;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 28px;
+}
+
+.perfil-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #cc0000;
+    color: white;
+    font-size: 28px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.perfil-nombre {
+    font-size: 22px;
+    margin-bottom: 4px;
+}
+
+.perfil-fecha {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 4px;
+}
+
+.perfil-stats {
+    font-size: 13px;
+    color: #cc0000;
+    font-weight: 500;
+}
